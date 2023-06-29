@@ -2,11 +2,11 @@
 
 # ---- Final executable ---- #
 
-NAME		=	minishell
+NAME		=	philo
 
 # ---- Files ---- #
 
-HEAD		=	header/philo.h
+HEAD		=	headers/philo.h
 
 SRC			=	sources/main.c
 
@@ -16,8 +16,6 @@ DIR_HEAD 	= 	headers/
 DIR_OBJS	=	.objs
 
 # ---- Paths ---- #
-
-LIBRARY		=	${DIR_LIB}/libft.a 
 
 OBJS 		=	${addprefix ${DIR_OBJS}/, ${SRC:.c=.o}}
 
@@ -40,8 +38,8 @@ CFLAGS 			= -Wall  -Wextra -Werror -I ${DIR_HEAD}
 all :
 	${MAKE} ${NAME}
 
-${NAME}: ${OBJS} ${LIBRARY}
-	${CC} ${CFLAGS} $^ ${LIBRARY} -o $@ -lreadline
+${NAME}: ${OBJS}
+	${CC} ${CFLAGS} $^ -o $@
 
 ${DIR_OBJS}/%.o: %.c ${HEAD}
 	@mkdir -p ${dir $@}
@@ -58,4 +56,4 @@ fclean : clean
 re : fclean
 	${MAKE} all
 
-.PHONY: all lib clean fclean re
+.PHONY: all clean fclean re
