@@ -3,39 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:20:18 by cllovio           #+#    #+#             */
-/*   Updated: 2023/06/29 14:52:52 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:51:32 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	parse_arg(int ac, char **av);
-void	print_error(int error_code);
+static void	init_structure_shared(t_shared *shared);
 
 int	main(int ac, char **av)
 {
-	parse_arg(ac, av);
+	t_shared	shared;
+
+	init_structure_shared(&shared);
+	parse_arg(ac, av, &shared);
+	create_philo(&shared);
 }
 
-bool	parse_arg(int ac, char **av)
+static void	init_structure_shared(t_shared *shared)
 {
-	(void)av;
-	
-	if (ac != 5 && ac != 6)
-		return (print_error(NB_ARG), false);
-	return (true);
+	shared->nbr_philo = 0;
+	shared->t_to_die = 0;
+	shared->t_to_eat = 0;
+	shared->nbr_t_must_eat = -1;
 }
 
-void	print_error(int error_code)
-{
-	if (error_code == NB_ARG)
-	{
-		printf(RED"error : wrong number of arguments\n"END);
-		printf("the program must be launch with the following arguments: \n");
-		printf("   number of philosophers\n   time to die\n   timeto sleep\n");
-		printf("   [optional] number of time each philosopher must eat\n");
-	}
-}
+//T'es sure de toi la ????
+// void	create_philo(t_shared *shared)
+// {
+// 	t_philo	philo;
+// 	int		i;
+//
+// 	i = 1;
+// 	while (i <= shared->nbr_philo)
+// 	{
+// 		philo = (t_philo)malloc(sizeof(t_philo))
+// 		if (!philo)
+// 			return ;
+// 		philo.id = i;
+// 		i++;
+// 	}
+// }

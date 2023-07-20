@@ -8,7 +8,9 @@ NAME		=	philo
 
 HEAD		=	headers/philo.h
 
-SRC			=	sources/main.c
+SRC			=	sources/main.c\
+				sources/parsing.c\
+				sources/print_error.c
 
 # ---- Directories ---- #
 DIR_HEAD 	= 	headers/

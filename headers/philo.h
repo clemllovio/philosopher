@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/06/29 14:53:12 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/07/20 15:41:00 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@
 
 enum {
 	NB_ARG,
+	WRONG_ARG,
+	EMPTY_ARG,
 };
+
+typedef struct s_shared {
+	int	nbr_philo;
+	int	t_to_die;
+	int	t_to_eat;
+	int	t_to_sleep;
+	int	nbr_t_must_eat;
+} t_shared;
+
+typedef struct s_philo {
+	int	id;
+} t_philo
+
+bool	parse_arg(int ac, char **av, t_shared *shared);
+void	print_error_parsing(int error_code);
+void	print_warning(void);
 
 #endif
