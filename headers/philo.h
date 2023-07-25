@@ -6,7 +6,7 @@
 /*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/20 15:41:00 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/07/24 13:28:20 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <stdio.h>
 # include <stdbool.h>
+# include "../ft_dprintf/ft_dprintf.h"
+# include "stdlib.h"
+# include "string.h"
 
 # define END "\033[0m"
 # define GREY "\033[1;30m"
@@ -34,22 +37,33 @@ enum {
 	NB_ARG,
 	WRONG_ARG,
 	EMPTY_ARG,
+	ZERO,
+	MALLOC_FAIL
 };
 
-typedef struct s_shared {
+enum {
+	SUCCESS = 0,
+	FAILURE = -1,
+};
+
+typedef struct s_philo {
+	int	id_philo;
+	int fork;
+} t_philo;
+
+typedef struct s_data {
 	int	nbr_philo;
 	int	t_to_die;
 	int	t_to_eat;
 	int	t_to_sleep;
 	int	nbr_t_must_eat;
-} t_shared;
+	t_philo	*philo;
+} t_data;
 
-typedef struct s_philo {
-	int	id;
-} t_philo
-
-bool	parse_arg(int ac, char **av, t_shared *shared);
+bool	parse_arg(int ac, char **av, t_data *data);
 void	print_error_parsing(int error_code);
 void	print_warning(void);
-
+int		ft_atoi(const char *str);
+void	print_error(int error_code);
+void	*ft_calloc(size_t count, size_t size);
 #endif
