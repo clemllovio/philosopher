@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:49:52 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/31 11:58:21 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/01 12:06:12 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ bool	parse_arg(int ac, char **av, t_data *shared)
 		return (false);
 	if (get_value(av, shared) == FAILURE)
 		return (false);
-	if (shared->time_to_die == 0 || shared->time_to_eat == 0 || shared->time_to_sleep == 0 \
+	if (shared->time_to_die == 0 || shared->time_to_eat == 0 || \
+	shared->time_to_sleep == 0 \
 	|| shared->nbr_t_must_eat == 0 || shared->nbr_philo == 0)
 		return (print_error_parsing(ZERO), false);
-	if (shared->time_to_die < 60 || shared->time_to_eat < 60 || shared->time_to_sleep < 60)
+	if (shared->time_to_die < 60 || shared->time_to_eat < 60 || \
+	shared->time_to_sleep < 60)
 		print_warning();
 	return (true);
 }

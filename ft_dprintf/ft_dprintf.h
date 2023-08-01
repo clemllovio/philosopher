@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 11:05:45 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/21 13:15:53 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/01 12:01:59 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 //ft_printf.c
-int	ft_dprintf(int fd, const char *format, ...);
+int		ft_dprintf(int fd, const char *format, ...);
 
 //ft_print_nbr.c
 void	ft_check_args(char format, va_list args, int *count, int fd);

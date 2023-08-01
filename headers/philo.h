@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/31 11:58:48 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/01 13:58:45 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ enum {
 	MALLOC_FAIL,
 	INIT_MUTEX_FAIL,
 	DEST_MUTEX_FAIL,
+	THREAD_CREATION_FAIL,
 };
 
 enum {
@@ -51,8 +52,8 @@ enum {
 
 /*======================= STRUCTURES =======================*/
 
-typedef struct s_philo t_philo;
-typedef struct s_data t_data;
+typedef struct s_philo	t_philo;
+typedef struct s_data	t_data;
 
 struct s_philo {
 	int				id_philo;
@@ -63,7 +64,7 @@ struct s_philo {
 	pthread_t		id_thread;
 	pthread_mutex_t	left_fork_mutex;
 	pthread_mutex_t	*right_fork_mutex;
-	t_data	*shared;
+	t_data			*shared;
 };
 
 struct s_data {
@@ -75,7 +76,7 @@ struct s_data {
 	bool			is_anyone_dead;
 	pthread_mutex_t	launcher;
 	pthread_mutex_t	talk;
-	t_philo	*philo;
+	t_philo			*philo;
 };
 
 /*======================= PROTOTYPES =======================*/
@@ -93,7 +94,6 @@ int		ft_atoi(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	init_structure_shared(t_data *shared);
 
-
-int	create_philosophers(t_data *shared);
+int		create_philosophers(t_data *shared);
 
 #endif

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:56:24 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/31 11:59:22 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/01 16:32:46 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int init_struct_philo(t_data *shared, int i);
+static int	init_struct_philo(t_data *shared, int i);
 static int	init_mutex_philo(t_data *shared, int i);
 static int	init_mutex_shared(t_data *shared);
 
@@ -51,24 +51,24 @@ static int	init_mutex_shared(t_data *shared)
 	return (SUCCESS);
 }
 
-static int init_struct_philo(t_data *shared, int i)
+static int	init_struct_philo(t_data *shared, int i)
 {
 	shared->philo[i].id_philo = i + 1;
 	shared->philo[i].shared = shared;
 	shared->philo[i].nbr_meal = 0;
 	shared->philo[i].am_i_dead = false;
-	if (i == shared->nbr_philo - 1)
+	if (i == 0)
 	{
 		shared->philo[i].right_fork_mutex = 
-			&(shared->philo[0].left_fork_mutex);
+			&(shared->philo[shared->nbr_philo - 1].left_fork_mutex);
 		shared->philo[i].right_fork = 
-			&(shared->philo[0].left_fork);
+			&(shared->philo[shared->nbr_philo - 1].left_fork);
 	}
 	else
 	{
 		shared->philo[i].right_fork_mutex = 
-			&(shared->philo[i + 1].left_fork_mutex);
-		shared->philo[i].right_fork = &(shared->philo[i + 1].left_fork);
+			&(shared->philo[i - 1].left_fork_mutex);
+		shared->philo[i].right_fork = &(shared->philo[i - 1].left_fork);
 	}
 	if (init_mutex_philo(shared, i) == FAILURE)
 		return (FAILURE);

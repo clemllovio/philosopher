@@ -38,7 +38,7 @@ RMF				=	rm -rf
 
 CC 				= cc
 
-CFLAGS 			= -Wall  -Wextra -Werror -I ${DIR_HEAD} -I ${DIR_LIB} 
+CFLAGS 			= -Wall  -Wextra -Werror -pthread -I ${DIR_HEAD} -I ${DIR_LIB} 
 
 # ====================== RULES ====================== #
 

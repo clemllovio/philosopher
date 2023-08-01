@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprint_nbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:05:21 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/21 13:28:49 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/01 11:59:50 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_putnbr_base(unsigned long nbr, char *base, int *count, int fd)
 static int	ft_strlen(char *str)
 {
 	int	len;
-	
+
 	len = 0;
 	while (str[len])
 		len++;
