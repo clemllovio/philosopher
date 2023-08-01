@@ -12,7 +12,8 @@ HEAD		=	headers/philo.h\
 SRC			=	sources/main.c\
 				sources/parsing.c\
 				sources/print_error.c\
-				sources/utils.c
+				sources/utils.c\
+				sources/init_philo.c
 
 # ---- Directories ---- #
 DIR_HEAD 	= 	headers/

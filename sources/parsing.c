@@ -6,14 +6,14 @@
 /*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 14:49:52 by cllovio           #+#    #+#             */
-/*   Updated: 2023/07/21 14:12:20 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/07/31 11:58:21 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static bool	check_number(char **tab);
-static void	get_value(char **av, t_data *shared);
+static int	get_value(char **av, t_data *shared);
 
 bool	parse_arg(int ac, char **av, t_data *shared)
 {
@@ -21,11 +21,12 @@ bool	parse_arg(int ac, char **av, t_data *shared)
 		return (print_error_parsing(NB_ARG), false);
 	if (check_number(av) == false)
 		return (false);
-	get_value(av, shared);
-	if (shared->t_to_die == 0 || shared->t_to_eat == 0 || shared->t_to_sleep == 0 \
+	if (get_value(av, shared) == FAILURE)
+		return (false);
+	if (shared->time_to_die == 0 || shared->time_to_eat == 0 || shared->time_to_sleep == 0 \
 	|| shared->nbr_t_must_eat == 0 || shared->nbr_philo == 0)
 		return (print_error_parsing(ZERO), false);
-	if (shared->t_to_die < 60 || shared->t_to_eat < 60 || shared->t_to_sleep < 60)
+	if (shared->time_to_die < 60 || shared->time_to_eat < 60 || shared->time_to_sleep < 60)
 		print_warning();
 	return (true);
 }
@@ -53,13 +54,25 @@ static bool	check_number(char **tab)
 	return (true);
 }
 
-// securiser
-static void	get_value(char **av, t_data *shared)
+static int	get_value(char **av, t_data *shared)
 {
 	shared->nbr_philo = ft_atoi(av[1]);
-	shared->t_to_die = ft_atoi(av[2]);
-	shared->t_to_eat = ft_atoi(av[3]);
-	shared->t_to_sleep = ft_atoi(av[4]);
+	if (shared->nbr_philo == FAILURE)
+		return (FAILURE);
+	shared->time_to_die = ft_atoi(av[2]);
+	if (shared->time_to_die == FAILURE)
+		return (FAILURE);
+	shared->time_to_eat = ft_atoi(av[3]);
+	if (shared->time_to_eat == FAILURE)
+		return (FAILURE);
+	shared->time_to_sleep = ft_atoi(av[4]);
+	if (shared->time_to_sleep == FAILURE)
+		return (FAILURE);
 	if (av[5])
+	{
 		shared->nbr_t_must_eat = ft_atoi(av[5]);
+		if (shared->nbr_t_must_eat == FAILURE)
+			return (FAILURE);
+	}
+	return (SUCCESS);
 }
