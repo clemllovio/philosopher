@@ -6,7 +6,7 @@
 /*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 15:56:24 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/01 16:32:46 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/02 15:53:07 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	init_struct_philo(t_data *shared, int i)
 	shared->philo[i].shared = shared;
 	shared->philo[i].nbr_meal = 0;
 	shared->philo[i].am_i_dead = false;
+	shared->philo[i].left_fork = FREE;
 	if (i == 0)
 	{
 		shared->philo[i].right_fork_mutex = 

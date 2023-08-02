@@ -6,7 +6,7 @@
 /*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/01 13:58:45 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/02 16:14:19 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <stdint.h>
 # include <pthread.h>
+# include <sys/time.h>
 # include "../ft_dprintf/ft_dprintf.h"
 
 /*======================= COULEUR =======================*/
@@ -43,6 +44,7 @@ enum {
 	INIT_MUTEX_FAIL,
 	DEST_MUTEX_FAIL,
 	THREAD_CREATION_FAIL,
+	GET_TIME_FAIL,
 };
 
 enum {
@@ -50,16 +52,31 @@ enum {
 	FAILURE = -1,
 };
 
+enum {
+	FREE,
+	TAKEN,
+};
+
+enum {
+	TAKE_FORK,
+	THINK,
+	EAT,
+	SLEEP,
+	DEAD,
+};
+
 /*======================= STRUCTURES =======================*/
 
-typedef struct s_philo	t_philo;
-typedef struct s_data	t_data;
+typedef struct s_philo		t_philo;
+typedef struct s_data		t_data;
 
 struct s_philo {
 	int				id_philo;
 	int				left_fork;
 	int				*right_fork;
 	int				nbr_meal;
+	long int		start_to_eat;
+	long int		end_to_eat;
 	bool			am_i_dead;
 	pthread_t		id_thread;
 	pthread_mutex_t	left_fork_mutex;
@@ -73,6 +90,7 @@ struct s_data {
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nbr_t_must_eat;
+	long int		start_time;
 	bool			is_anyone_dead;
 	pthread_mutex_t	launcher;
 	pthread_mutex_t	talk;

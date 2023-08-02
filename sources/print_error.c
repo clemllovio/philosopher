@@ -6,7 +6,7 @@
 /*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:15:27 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/01 14:00:36 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/02 13:17:52 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	print_error(int error_code)
 		ft_dprintf(2, RED"ERROR: Mutex destruction failed\n"END);
 	else if (error_code == THREAD_CREATION_FAIL)
 		ft_dprintf(2, RED"ERROR: Thread creation failed\n"END);
+	else if (error_code == GET_TIME_FAIL)
+		ft_dprintf(2, RED"ERROR: Not able to get the tine"END);
 }
 
 void	print_error_parsing(int error_code)
