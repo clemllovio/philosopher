@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   print_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:15:27 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/02 13:17:52 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/02 20:23:29 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,18 @@ void	print_warning(void)
 {
 	ft_dprintf(2, YELLOW"WARNING: Times under 60ms will lead ");
 	ft_dprintf(2, "to the death of the philosophers\n"END);
+}
+
+void	philo_says(int action, long int timestamp, int philo_id)
+{
+	if (action == TAKE_FORK)
+		ft_dprintf(1, BLUE"%d %d has taken a fork\n"END, timestamp, philo_id);
+	else if (action == THINK)
+		ft_dprintf(1, GREEN"%d %d is thinking\n"END, timestamp, philo_id);
+	else if (action == EAT)
+		ft_dprintf(1, PURPLE"%d %d is eating\n"END, timestamp, philo_id);
+	else if (action == SLEEP)
+		ft_dprintf(1, YELLOW"%d %d is sleeping\n"END, timestamp, philo_id);
+	else if (action == DEAD)
+		ft_dprintf(1, GREEN"%d %d died\n"END, timestamp, philo_id);
 }

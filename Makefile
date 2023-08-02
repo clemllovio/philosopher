@@ -9,11 +9,14 @@ NAME		=	philo
 HEAD		=	headers/philo.h\
 				ft_dprintf/ft_dprintf.h
 
-SRC			=	sources/main.c\
+SRC			=	sources/fork.c\
+				sources/init_philo.c\
+				sources/launch_philo.c\
+				sources/main.c\
 				sources/parsing.c\
-				sources/print_error.c\
-				sources/utils.c\
-				sources/init_philo.c
+				sources/print_messages.c\
+				sources/routine.c\
+				sources/utils.c
 
 # ---- Directories ---- #
 DIR_HEAD 	= 	headers/
