@@ -6,7 +6,7 @@
 /*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/02 16:14:19 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:23:11 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ struct s_philo {
 	int				left_fork;
 	int				*right_fork;
 	int				nbr_meal;
+	int				nbr_fork;
+	long int		lifetime;
 	long int		start_to_eat;
 	long int		end_to_eat;
-	bool			am_i_dead;
+	long int		start_to_sleep;
+	bool			this_is_the_end;
 	pthread_t		id_thread;
 	pthread_mutex_t	left_fork_mutex;
 	pthread_mutex_t	*right_fork_mutex;
@@ -85,33 +88,47 @@ struct s_philo {
 };
 
 struct s_data {
-	int				nbr_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				nbr_t_must_eat;
-	long int		start_time;
-	bool			is_anyone_dead;
-	pthread_mutex_t	launcher;
-	pthread_mutex_t	talk;
-	t_philo			*philo;
+	int					nbr_philo;
+	int					time_to_die;
+	int					time_to_eat;
+	int					time_to_sleep;
+	int					nbr_t_must_eat;
+	struct timeval		start_time;
+	bool				is_anyone_dead;
+	pthread_mutex_t		launcher;
+	pthread_mutex_t		talk;
+	t_philo				*philo;
 };
 
 /*======================= PROTOTYPES =======================*/
 
-/* ---- parsing.c ----*/
-bool	parse_arg(int ac, char **av, t_data *data);
+/* ---- fork.c ----*/
+int			take_a_fork(t_philo *philo);
+void		leave_fork(t_philo *philo);
 
-/* ---- print_error.c ----*/
-void	print_error(int error_code);
-void	print_error_parsing(int error_code);
-void	print_warning(void);
+/* ---- init_philo.c ----*/
+int			create_philosophers(t_data *shared);
+
+/* ---- launch_philo.c ----*/
+int			launch_philo(t_data *shared);
+
+/* ---- parsing.c ----*/
+bool		parse_arg(int ac, char **av, t_data *data);
+
+/* ---- print_messages.c ----*/
+void		print_error(int error_code);
+void		print_error_parsing(int error_code);
+void		print_warning(void);
+void		philo_says(int action, long int timestamp, int philo_id);
+
+/* ---- routine.c ----*/
+void		routine(t_philo *philo);
 
 /* ---- utils.c ----*/
-int		ft_atoi(const char *str);
-void	*ft_calloc(size_t count, size_t size);
-void	init_structure_shared(t_data *shared);
-
-int		create_philosophers(t_data *shared);
+int			ft_atoi(const char *str);
+void		*ft_calloc(size_t count, size_t size);
+void		init_structure_shared(t_data *shared);
+long int	get_time(struct timeval start_time);
+int			kill_the_philosophers(t_data *shared);
 
 #endif

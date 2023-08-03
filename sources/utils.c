@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:05:07 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/02 20:24:04 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:55:39 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ void	init_structure_shared(t_data *shared)
 	shared->is_anyone_dead = false;
 }
 
-long int	get_time(void)
+long int	get_time(struct timeval start_time)
 {
 	struct timeval	tv;
+	int				time;
 	
 	if (gettimeofday(&tv, NULL) == -1)
 		return (print_error(GET_TIME_FAIL), FAILURE);
-	return (((tv.tv_sec % 1000) * 1000) + (tv.tv_usec / 1000));
+	time = (tv.tv_sec - start_time.tv_sec) * 1000 + (tv.tv_usec - start_time.tv_usec) / 1000;
+	return (time);
 }
 
 int	kill_the_philosophers(t_data *shared)
@@ -69,6 +71,7 @@ int	kill_the_philosophers(t_data *shared)
 	{
 		if (pthread_mutex_destroy(&(shared->philo[i].left_fork_mutex)) != 0)
 			return (print_error(DEST_MUTEX_FAIL), FAILURE);
+		i++;
 	}
 	free(shared->philo);
 	return (SUCCESS);

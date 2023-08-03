@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:20:18 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/02 20:38:05 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/03 14:55:56 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 		return (FAILURE);
 	if (launch_philo(&shared) == FAILURE)
 		return (FAILURE);
-	// if (kill_the_philosophers(&shared) == FAILURE)
-	// 	return (FAILURE);
+	if (kill_the_philosophers(&shared) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }

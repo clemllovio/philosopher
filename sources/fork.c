@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:04:32 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/02 20:05:25 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/03 13:58:46 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 int	take_a_fork(t_philo *philo)
 {
-	int	nbr_fork;
-
-	nbr_fork = 0;
 	pthread_mutex_lock(&(philo->left_fork_mutex));
 	if (philo->left_fork == FREE)
 	{
 		philo->left_fork = TAKEN;
-		nbr_fork++;
+		pthread_mutex_lock(&(philo->shared->launcher));
+		philo_says(TAKE_FORK, get_time(philo->shared->start_time), philo->id_philo);
+		pthread_mutex_unlock(&(philo->shared->launcher));
+		philo->nbr_fork++;
 	}
 	pthread_mutex_unlock(&(philo->left_fork_mutex));
 	pthread_mutex_lock(philo->right_fork_mutex);
 	if (*(philo->right_fork) == FREE)
 	{
 		*(philo->right_fork) = TAKEN;
-		nbr_fork++;
+		pthread_mutex_lock(&(philo->shared->launcher));
+		philo_says(TAKE_FORK, get_time(philo->shared->start_time), philo->id_philo);
+		pthread_mutex_unlock(&(philo->shared->launcher));
+		philo->nbr_fork++;
 	}
 	pthread_mutex_unlock(philo->right_fork_mutex);
-	if (nbr_fork == 2)
-	{
-		pthread_mutex_lock(&(philo->shared->launcher));
-		philo_says(TAKE_FORK, (get_time() - philo->shared->start_time), philo->id_philo);
-		pthread_mutex_unlock(&(philo->shared->launcher));
+	usleep(1000);
+	if (philo->nbr_fork == 2)
 		return (SUCCESS);
-	}
 	else
 		return (FAILURE);
 }
@@ -52,4 +51,6 @@ void	leave_fork(t_philo *philo)
 	if (*(philo->right_fork) == TAKEN)
 		*(philo->right_fork) = FREE;
 	pthread_mutex_unlock(philo->right_fork_mutex);
+	pthread_mutex_lock(&(philo->shared->launcher));
+	pthread_mutex_unlock(&(philo->shared->launcher));
 }

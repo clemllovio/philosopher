@@ -41,7 +41,7 @@ RMF				=	rm -rf
 
 CC 				= cc
 
-CFLAGS 			= -Wall  -Wextra -Werror -pthread -fsanitize=thread -g3 -I ${DIR_HEAD} -I ${DIR_LIB}
+CFLAGS 			= -Wall -Wextra -Werror -pthread -fsanitize=thread -g3 -I ${DIR_HEAD} -I ${DIR_LIB}
 
 # ====================== RULES ====================== #
 
