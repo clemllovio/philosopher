@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 20:21:52 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/03 15:47:03 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/07 14:29:30 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	launch_philo(t_data *shared)
 	}
 	if (gettimeofday(&(shared->start_time), NULL) == -1)
 		return (print_error(GET_TIME_FAIL), FAILURE);
-	
 	pthread_mutex_unlock(&(shared->launcher));
 	if (wait_the_philo(shared) == FAILURE)
 		return (FAILURE);

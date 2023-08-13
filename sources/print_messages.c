@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:15:27 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/03 11:22:01 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/11 12:43:33 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ void	print_warning(void)
 	ft_dprintf(2, "to the death of the philosophers\n"END);
 }
 
-void	philo_says(int action, long int timestamp, int philo_id)
+void	print_routine(int action, long int timestamp, int philo_id)
 {
 	if (action == TAKE_FORK)
-		printf(BLUE"%ld %d has taken a fork\n"END, timestamp, philo_id);
+		printf("%ld %d has taken a fork\n", timestamp, philo_id);
 	else if (action == THINK)
-		printf(GREEN"%ld %d is thinking\n"END, timestamp, philo_id);
+		printf("%ld %d is thinking\n", timestamp, philo_id);
 	else if (action == EAT)
-		printf(PURPLE"%ld %d is eating\n"END, timestamp, philo_id);
+		printf("%ld %d is eating\n", timestamp, philo_id);
 	else if (action == SLEEP)
-		printf(YELLOW"%ld %d is sleeping\n"END, timestamp, philo_id);
+		printf("%ld %d is sleeping\n", timestamp, philo_id);
 	else if (action == DEAD)
-		printf(GREEN"%ld %d died\n"END, timestamp, philo_id);
+		printf("%ld %d died\n", timestamp, philo_id);
 }

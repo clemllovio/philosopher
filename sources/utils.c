@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:05:07 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/03 14:55:39 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/07 15:19:49 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ void	*ft_calloc(size_t count, size_t size)
 void	init_structure_shared(t_data *shared)
 {
 	shared->nbr_philo = 0;
+	shared->nbr_philo_finished_eating = 0;
 	shared->time_to_die = 0;
 	shared->time_to_eat = 0;
 	shared->nbr_t_must_eat = -1;
-	shared->is_anyone_dead = false;
+	shared->this_is_the_end = false;
 }
 
 long int	get_time(struct timeval start_time)

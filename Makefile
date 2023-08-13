@@ -9,7 +9,8 @@ NAME		=	philo
 HEAD		=	headers/philo.h\
 				ft_dprintf/ft_dprintf.h
 
-SRC			=	sources/fork.c\
+SRC			=	sources/death.c\
+				sources/fork.c\
 				sources/init_philo.c\
 				sources/launch_philo.c\
 				sources/main.c\

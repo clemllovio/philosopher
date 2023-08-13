@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/03 16:23:11 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/11 12:19:33 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ enum {
 	THINK,
 	EAT,
 	SLEEP,
+	ALIVE,
 	DEAD,
 };
 
@@ -80,7 +81,7 @@ struct s_philo {
 	long int		start_to_eat;
 	long int		end_to_eat;
 	long int		start_to_sleep;
-	bool			this_is_the_end;
+	bool			am_i_dead;
 	pthread_t		id_thread;
 	pthread_mutex_t	left_fork_mutex;
 	pthread_mutex_t	*right_fork_mutex;
@@ -92,9 +93,10 @@ struct s_data {
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
+	int					nbr_philo_finished_eating;
 	int					nbr_t_must_eat;
 	struct timeval		start_time;
-	bool				is_anyone_dead;
+	bool				this_is_the_end;
 	pthread_mutex_t		launcher;
 	pthread_mutex_t		talk;
 	t_philo				*philo;
@@ -102,9 +104,13 @@ struct s_data {
 
 /*======================= PROTOTYPES =======================*/
 
+/* ---- death.c ----*/
+bool	is_it_over(t_philo	*philo);
+int	still_alive_or_not(int current_time, t_philo *philo);
+
 /* ---- fork.c ----*/
-int			take_a_fork(t_philo *philo);
-void		leave_fork(t_philo *philo);
+int			take_forks(t_philo *philo);
+void		leave_forks(t_philo *philo);
 
 /* ---- init_philo.c ----*/
 int			create_philosophers(t_data *shared);
@@ -119,8 +125,7 @@ bool		parse_arg(int ac, char **av, t_data *data);
 void		print_error(int error_code);
 void		print_error_parsing(int error_code);
 void		print_warning(void);
-void		philo_says(int action, long int timestamp, int philo_id);
-
+void		print_routine(int action, long int timestamp, int philo_id);
 /* ---- routine.c ----*/
 void		routine(t_philo *philo);
 
