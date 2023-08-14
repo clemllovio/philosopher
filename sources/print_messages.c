@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_messages.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 15:15:27 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/11 12:43:33 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:27:08 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,28 @@ void	print_warning(void)
 	ft_dprintf(2, "to the death of the philosophers\n"END);
 }
 
-void	print_routine(int action, long int timestamp, int philo_id)
+void	print_routine(t_philo *philo, int action)
 {
-	if (action == TAKE_FORK)
-		printf("%ld %d has taken a fork\n", timestamp, philo_id);
+	pthread_mutex_lock(&(philo->shared->talk));
+	if (action == DEAD)
+		printf("%ld %d died\n", get_time(philo->shared->start_time) \
+		, philo->id_philo);
+	else if (philo->shared->this_is_the_end == true)
+	{
+		pthread_mutex_unlock(&(philo->shared->talk));
+		return ;
+	}
+	else if (action == TAKE_FORK)
+		printf("%ld %d has taken a fork\n", \
+		get_time(philo->shared->start_time), philo->id_philo);
 	else if (action == THINK)
-		printf("%ld %d is thinking\n", timestamp, philo_id);
+		printf("%ld %d is thinking\n", \
+		get_time(philo->shared->start_time), philo->id_philo);
 	else if (action == EAT)
-		printf("%ld %d is eating\n", timestamp, philo_id);
+		printf("%ld %d is eating\n", \
+		get_time(philo->shared->start_time), philo->id_philo);
 	else if (action == SLEEP)
-		printf("%ld %d is sleeping\n", timestamp, philo_id);
-	else if (action == DEAD)
-		printf("%ld %d died\n", timestamp, philo_id);
+		printf("%ld %d is sleeping\n", \
+		get_time(philo->shared->start_time), philo->id_philo);
+	pthread_mutex_unlock(&(philo->shared->talk));
 }

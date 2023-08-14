@@ -17,6 +17,7 @@ SRC			=	sources/death.c\
 				sources/parsing.c\
 				sources/print_messages.c\
 				sources/routine.c\
+				sources/utils_routine.c\
 				sources/utils.c
 
 # ---- Directories ---- #
@@ -42,7 +43,7 @@ RMF				=	rm -rf
 
 CC 				= cc
 
-CFLAGS 			= -Wall -Wextra -Werror -pthread -fsanitize=thread -g3 -I ${DIR_HEAD} -I ${DIR_LIB}
+CFLAGS 			= -Wall -Wextra -Werror -pthread -I ${DIR_HEAD} -I ${DIR_LIB}
 
 # ====================== RULES ====================== #
 

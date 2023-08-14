@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 14:25:00 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/11 12:19:33 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:12:54 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ struct s_data {
 /*======================= PROTOTYPES =======================*/
 
 /* ---- death.c ----*/
-bool	is_it_over(t_philo	*philo);
-int	still_alive_or_not(int current_time, t_philo *philo);
+bool		is_it_over(t_philo	*philo);
+int			still_alive_or_not(int current_time, t_philo *philo);
 
 /* ---- fork.c ----*/
 int			take_forks(t_philo *philo);
@@ -125,9 +125,15 @@ bool		parse_arg(int ac, char **av, t_data *data);
 void		print_error(int error_code);
 void		print_error_parsing(int error_code);
 void		print_warning(void);
-void		print_routine(int action, long int timestamp, int philo_id);
+void		print_routine(t_philo *philo, int action);
+
 /* ---- routine.c ----*/
 void		routine(t_philo *philo);
+
+/* ---- utils_routine.c ----*/
+void		did_i_eat_enough(t_philo *philo);
+int			do_the_action(t_philo *philo, long int action_start_time, \
+			long int action_duration);
 
 /* ---- utils.c ----*/
 int			ft_atoi(const char *str);

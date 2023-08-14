@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 12:04:25 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/11 12:19:51 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/14 11:13:52 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@ int	still_alive_or_not(int current_time, t_philo *philo)
 {
 	if (current_time > philo->lifetime)
 	{
-		philo->shared->this_is_the_end = true;
+		pthread_mutex_lock(&(philo->shared->talk));
+		if (philo->shared->this_is_the_end != true)
+			philo->shared->this_is_the_end = true;
+		else
+			return (pthread_mutex_unlock(&(philo->shared->talk)), DEAD);
+		pthread_mutex_unlock(&(philo->shared->talk));
 		philo->am_i_dead = true;
-		print_routine(DEAD, current_time, philo->id_philo);
+		print_routine(philo, DEAD);
 		return (DEAD);
 	}
 	return (ALIVE);

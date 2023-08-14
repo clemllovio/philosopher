@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cllovio <cllovio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cllovio <cllovio@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 14:05:07 by cllovio           #+#    #+#             */
-/*   Updated: 2023/08/07 15:19:49 by cllovio          ###   ########.fr       */
+/*   Updated: 2023/08/14 07:54:36 by cllovio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ long int	get_time(struct timeval start_time)
 {
 	struct timeval	tv;
 	int				time;
-	
+
 	if (gettimeofday(&tv, NULL) == -1)
 		return (print_error(GET_TIME_FAIL), FAILURE);
-	time = (tv.tv_sec - start_time.tv_sec) * 1000 + (tv.tv_usec - start_time.tv_usec) / 1000;
+	time = (tv.tv_sec - start_time.tv_sec) * 1000 + \
+	(tv.tv_usec - start_time.tv_usec) / 1000;
 	return (time);
 }
 
